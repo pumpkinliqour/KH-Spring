@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+	<!-- AOP 적용하기 -->
+	<!-- 1. AOP 적용 공통모듈을 등록하자(객체등록) -->
+	<!-- <bean id="loggerAspect" class="com.kh.spring.common.aop.LoggerAspect"/> -->
+	<!-- 2. AOP 적용 설정하기 -->
+	<!-- <aop:config> -->
+		<!-- <aop:aspect id="loggerAspect" ref="loggerAspect"> -->
+		<!-- execution : (* :접근제한자) -->
+			<!-- 스프링 패키지 밑에 있는 모든 객체의 메소드를 나타냄 -->
+			<!-- <aop:pointcut expression="execution(* com.kh.spring..*(..))" id="pcAll"/> -->
+			<!-- 스프링 패키지 밑에 있는 객체명이 Service인 메소드만 나타냄 -->
+			<!-- <aop:pointcut expression="execution(* com.kh.spring..*Service.*(..))" id="pcAll"/> -->
+			<!-- 스프링 패키지 밑에 있는 객체명이 Dao인 메소드 중 앞글자가 insert인 것만 나타냄 -->
+			<!-- <aop:pointcut expression="execution(* com.kh.spring..*Dao.insert*(..))" id="pcAll"/> -->
+			<!-- loggerAspect 클래스 안에 있는 적용할 메소드 명 -->
+			<!-- <aop:around method="loggerAdvice" pointcut-ref="pcAll"/> -->
+			<!-- <aop:before method="beforeAdvice" pointcut-ref="pcAll"/> -->
+		<!-- </aop:aspect> -->
+	<!-- </aop:config> -->
+	
+	<!-- 어노테이션을 이용한 AOP적용 -->
+	<aop:aspectj-autoproxy>
+	
+	</aop:aspectj-autoproxy>
+</beans>

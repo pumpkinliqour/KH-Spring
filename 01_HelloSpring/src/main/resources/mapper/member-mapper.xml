@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="member">
+
+	<resultMap id="memberMap" type="map">
+	
+	</resultMap>
+	
+	<resultMap id="memberType" type="member">
+		<result column="hobby" property="hobby" typeHandler="strArray"/>
+	</resultMap>
+	
+	<select id="login"	parameterType="map" resultMap="memberMap">
+		SELECT * FROM MEMBER WHERE USERID=#{userId}
+	</select>
+	
+	<insert id="memberEnroll" parameterType="member">
+		INSERT INTO MEMBER VALUES(#{userId},#{password},#{userName},#{gender},#{age},#{email},#{phone},#{address},#{hobby, typeHandler=strArray},SYSDATE)
+	</insert>
+	
+	<update id="myPageUpdate" parameterType="member">
+		UPDATE MEMBER SET PASSWORD=#{password}, USERNAME=#{userName}, GENDER=#{gender}, AGE=#{age}, EMAIL=#{email}, PHONE=#{phone}, ADDRESS=#{address}, HOBBY=#{hobby, typeHandler=strArray}, ENROLLDATE=SYSDATE WHERE USERID=#{userId}
+	</update>
+	
+	<select id="selectMemberOne" parameterType="string" resultMap="memberType">
+		SELECT * FROM MEMBER WHERE USERID=#{userId}
+	</select>
+</mapper>

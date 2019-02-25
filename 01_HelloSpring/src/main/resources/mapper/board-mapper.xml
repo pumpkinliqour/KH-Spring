@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="board">
+	<resultMap type="board" id="boardType">
+	</resultMap>
+	<resultMap type="map" id="boardMap">
+	</resultMap>
+	
+	<select id="boardList" resultType="map">
+		SELECT A.*,(SELECT COUNT(*) FROM ATTACHMENT WHERE BOARDNO=A.BOARDNO) AS ATTACHCOUNT FROM BOARD A ORDER BY BOARDDATE DESC
+	</select>
+	
+	<select id="boardCount" resultType="_int">
+		SELECT COUNT(*) FROM BOARD
+	</select>
+	
+	<insert id="insertBoard" parameterType="map">
+	INSERT INTO BOARD VALUES(SEQ_BOARDNO.NEXTVAL,#{title},#{writer},#{content},DEFAULT,DEFAULT)
+	<selectKey keyProperty="boardNo" resultType="string" order="AFTER"> SELECT SEQ_BOARDNO.CURRVAL FROM DUAL</selectKey>
+	</insert>
+	
+	<insert id="insertAttach" parameterType="com.kh.spring.board.model.vo.Attachment">
+		INSERT INTO ATTACHMENT (ATTACHMENTNO,BOARDNO,ORIFILENAME,RENAMEDFILENAME,UPLOADDATE,DOWNLOADCOUNT,STATUS) VALUES(SEQ_ATTACHMENTNO.NEXTVAL, #{boardNo}, #{originalFileName}, #{reNamedFileName}, SYSDATE, DEFAULT, DEFAULT)
+	</insert>
+</mapper>
