@@ -1,8 +1,10 @@
 package com.kh.spring.member.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -149,6 +151,23 @@ public class MemberController {
 		
 		return "common/msg";
 	}
+	
+	
+	
+	
+	
+	@RequestMapping("/member/checkId.do")
+	public void checkId(String userId, HttpServletResponse response) throws IOException {
+		logger.info("중복체크");
+		boolean isId=service.checkId(userId)==0?false:true;
+		logger.info(isId);
+		response.getWriter().print(isId);
+	}
+	
+	
+	
+	
+	
 	
 	@RequestMapping("/member/myPage.do")
 	public ModelAndView myPage(String userId) {

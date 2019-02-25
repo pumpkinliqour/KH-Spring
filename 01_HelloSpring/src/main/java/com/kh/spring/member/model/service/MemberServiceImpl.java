@@ -33,4 +33,11 @@ public class MemberServiceImpl implements MemberService {
 	public Member selectMemberOne(String userId) {
 		return dao.selectMemberOne(userId);
 	}
+
+	@Override
+	public int checkId(String userId) {
+		return dao.checkId(userId);
+	}
+	
+	
 }

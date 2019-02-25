@@ -10,4 +10,5 @@ public interface MemberService {
 	int memberEnrollEnd(Member member);
 	int myPageUpdate(Member member);
 	Member selectMemberOne(String userId);
+	int checkId(String userId);
 }

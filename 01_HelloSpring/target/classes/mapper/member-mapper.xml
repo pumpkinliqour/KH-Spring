@@ -18,6 +18,10 @@
 		INSERT INTO MEMBER VALUES(#{userId},#{password},#{userName},#{gender},#{age},#{email},#{phone},#{address},#{hobby, typeHandler=strArray},SYSDATE)
 	</insert>
 	
+	<select id="memberUpdate" parameterType="string" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER WHERE USERID=#{userId}
+	</select>
+	
 	<update id="myPageUpdate" parameterType="member">
 		UPDATE MEMBER SET PASSWORD=#{password}, USERNAME=#{userName}, GENDER=#{gender}, AGE=#{age}, EMAIL=#{email}, PHONE=#{phone}, ADDRESS=#{address}, HOBBY=#{hobby, typeHandler=strArray}, ENROLLDATE=SYSDATE WHERE USERID=#{userId}
 	</update>
