@@ -38,6 +38,16 @@ public class BoardDaoImpl implements BoardDao {
 		return session.selectOne("board.boardCount");
 	}
 
+	@Override
+	public Map<String, String> selectBoard(int boardNo) {
+		return session.selectOne("board.selectBoard",boardNo);
+	}
+
+	@Override
+	public List<Map<String, String>> selectAttachList(int boardNo) {
+		return session.selectList("board.selectAttach", boardNo);
+	}
+
 	
 	
 }

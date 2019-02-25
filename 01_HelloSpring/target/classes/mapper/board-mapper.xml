@@ -15,11 +15,19 @@
 	</select>
 	
 	<insert id="insertBoard" parameterType="map">
-	INSERT INTO BOARD VALUES(SEQ_BOARDNO.NEXTVAL,#{title},#{writer},#{content},DEFAULT,DEFAULT)
+		INSERT INTO BOARD VALUES(SEQ_BOARDNO.NEXTVAL,#{title},#{writer},#{content},DEFAULT,DEFAULT)
 	<selectKey keyProperty="boardNo" resultType="string" order="AFTER"> SELECT SEQ_BOARDNO.CURRVAL FROM DUAL</selectKey>
 	</insert>
 	
 	<insert id="insertAttach" parameterType="com.kh.spring.board.model.vo.Attachment">
-		INSERT INTO ATTACHMENT (ATTACHMENTNO,BOARDNO,ORIFILENAME,RENAMEDFILENAME,UPLOADDATE,DOWNLOADCOUNT,STATUS) VALUES(SEQ_ATTACHMENTNO.NEXTVAL, #{boardNo}, #{originalFileName}, #{reNamedFileName}, SYSDATE, DEFAULT, DEFAULT)
+		INSERT INTO ATTACHMENT VALUES(SEQ_ATTACHMENTNO.NEXTVAL, #{boardNo}, #{originalFileName}, #{reNamedFileName}, SYSDATE, DEFAULT, DEFAULT)
 	</insert>
+	
+	<select id="selectBoard" parameterType="_int" resultType="map">
+		SELECT * FROM BOARD WHERE BOARDNO=#{boardNo}
+	</select>
+	
+	<select id="selectAttach" parameterType="_int" resultType="map"> 
+	SELECT * FROM ATTACHMENT WHERE BOARDNO=#{boardNo} 
+	</select>
 </mapper>

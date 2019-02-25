@@ -5,6 +5,9 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.spring.board.model.dao.BoardDao;
 import com.kh.spring.board.model.vo.Attachment;
@@ -28,29 +31,42 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int insertBoard(Map<String, String> board, List<Attachment> files) {
+	/*@Transactional(propagation=Propagation.REQUIRED, isolation=Isolation.DEFAULT, rollbackFor=Exception.class)*/
+	public int insertBoard(Map<String, String> board, List<Attachment> files) throws BoardException {
 		//dao를 세번 가야함.
 		int result=0;
 		try {
 			result=dao.insertBoard(board);
 			if(result==0) {
-				throw new BoardException(); //롤백할 상황일 때
+				throw new BoardException(); //익셉션 출력
 			}
 			for(Attachment a : files) {
 				a.setBoardNo(Integer.parseInt(board.get("boardNo")));
 				result=dao.insertAttach(a);
 				if(result==0) {
-					throw new BoardException();
+					throw new BoardException("파일 업로드 실패");
 				}
 			}
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
+			throw e;
 		}
 		
 		
 		return result;
+	}
+
+	@Override
+	public Map<String, String> selectBoard(int boardNo) {
+		
+		return dao.selectBoard(boardNo);
+	}
+
+	@Override
+	public List<Map<String, String>> selectAttachList(int boardNo) {
+		return dao.selectAttachList(boardNo);
 	}
 	
 	

@@ -1,12 +1,10 @@
 package com.kh.spring.common.exception;
 
-public class BoardException extends RuntimeException{
-
+public class BoardException extends Exception {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 6627527849489357291L;
-
+	private static final long serialVersionUID = 3721183474469099280L;
 	public BoardException() {
 		super();
 	}

@@ -12,4 +12,6 @@ public interface BoardDao {
 	int boardCount();
 	int insertBoard(Map<String,String> board);
 	int insertAttach(Attachment a);
+	Map<String,String> selectBoard(int boardNo);
+	List<Map<String,String>> selectAttachList(int boardNo);
 }
