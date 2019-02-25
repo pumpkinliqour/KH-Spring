@@ -43,5 +43,11 @@
 		<beans:property name="maxUploadSize" value="10485760"/> <!-- 10메가 -->
 	</beans:bean>
 	
+	<!-- JSON처리를 위한 JSONVIEW를 등록 -->
+	<beans:bean id="viewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<beans:property name="order" value="1"></beans:property>
+	</beans:bean>
+	<beans:bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView"/>
+	
 </beans:beans>
 

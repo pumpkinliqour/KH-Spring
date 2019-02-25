@@ -1,10 +1,11 @@
 package com.kh.spring.member.controller;
 
-import java.io.IOException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -157,11 +158,29 @@ public class MemberController {
 	
 	
 	@RequestMapping("/member/checkId.do")
-	public void checkId(String userId, HttpServletResponse response) throws IOException {
+	/*public void checkId(String userId, HttpServletResponse response) throws IOException {
 		logger.info("중복체크");
 		boolean isId=service.checkId(userId)==0?false:true;
 		logger.info(isId);
 		response.getWriter().print(isId);
+	}*/
+	public ModelAndView checkId(String userId, ModelAndView mv) throws Exception{
+		Map map=new HashMap();
+		boolean isId=service.checkId(userId)==0?false:true;
+		map.put("isId", isId);
+		List<String> list=new ArrayList();
+		list.add("Yoo");
+		list.add("Lee");
+		list.add("Kim");
+		list.add("Hwang");
+		list.add("Joo");
+		mv.addAllObjects(map); //맵에있는것을 한번에 보냄
+		mv.addObject("char", URLEncoder.encode("문자열", "UTF-8"));
+		mv.addObject("num", 1);
+		mv.addObject("list", list);
+		mv.setViewName("jsonView"); //서블릿콘텍스트에서 작성한 id값으로 작성해야함.
+		
+		return mv;
 	}
 	
 	

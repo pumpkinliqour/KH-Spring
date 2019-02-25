@@ -51,7 +51,14 @@
             				data:{"userId":userId},
             				success:function(data){
             					console.log(data);
-            					if(data=='true')
+            					console.log(data.num+" : "+typeof data.num);
+            					console.log(decodeURI(data['char']+" : "+typeof data['char']));
+            					console.log(data.isId+" : "+typeof data.isId);
+            					console.log(data.list+" : "+typeof data.list);
+            					for(var i=0; i<data.list.length; i++){
+            						console.log("for : "+data.list[i]);
+            					}
+            					if(data.isId==true)
             					{
             						$(".guide.ok").hide();
             						$(".guide.error").show();            					
