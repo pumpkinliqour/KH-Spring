@@ -37,7 +37,7 @@ public class MemberDaoImpl implements MemberDao {
 
 	@Override
 	public int checkId(String userId) {
-		return sqlSession.selectOne("member.memberUpdate", userId);
+		return sqlSession.selectOne("member.selectUserId", userId);
 	}
 	
 	

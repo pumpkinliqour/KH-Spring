@@ -18,7 +18,7 @@
 		INSERT INTO MEMBER VALUES(#{userId},#{password},#{userName},#{gender},#{age},#{email},#{phone},#{address},#{hobby, typeHandler=strArray},SYSDATE)
 	</insert>
 	
-	<select id="memberUpdate" parameterType="string" resultType="_int">
+	<select id="selectUserId" parameterType="string" resultType="_int">
 		SELECT COUNT(*) FROM MEMBER WHERE USERID=#{userId}
 	</select>
 	

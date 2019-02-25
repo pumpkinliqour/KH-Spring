@@ -165,10 +165,10 @@ public class MemberController {
 		response.getWriter().print(isId);
 	}*/
 	public ModelAndView checkId(String userId, ModelAndView mv) throws Exception{
-		Map map=new HashMap();
+		Map<String, Boolean> map=new HashMap<String, Boolean>();
 		boolean isId=service.checkId(userId)==0?false:true;
 		map.put("isId", isId);
-		List<String> list=new ArrayList();
+		List<String> list=new ArrayList<String>();
 		list.add("Yoo");
 		list.add("Lee");
 		list.add("Kim");
